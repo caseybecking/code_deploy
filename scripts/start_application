@@ -1,0 +1,11 @@
+#!/bin/bash
+#####
+# Ensure ownership is set before starting
+#####
+chown -R nginx:nginx /var/www/magento
+
+#####
+# Start up server
+#####
+service nginx restart
+service php-fpm restart

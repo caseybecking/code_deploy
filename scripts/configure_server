@@ -1,0 +1,60 @@
+#!/bin/bash
+
+#####
+# Prepare for overwrite of php-fpm and nginx files
+#####
+if [ -e "/etc/php-fpm.d/www.conf" ]
+  then
+    mv -f /etc/php-fpm.d/www.conf /etc/php-fpm.d/www.conf.bk
+fi
+if [ -e "/etc/php.ini" ]
+  then
+    mv -f /etc/php.ini /etc/php.ini.bk
+fi
+if [ -e "/etc/nginx/nginx.conf" ]
+  then
+    mv -f /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bk
+fi
+if [ -e "/etc/nginx/conf.d/app.conf" ]
+  then
+    mv -f /etc/nginx/conf.d/app.conf /etc/nginx/conf.d/app.conf.bk
+fi
+if [ -e "/etc/nginx/magento/magento.conf" ]
+  then
+    mv -f /etc/nginx/magento/magento.conf /etc/nginx/magento/magento.conf.bk
+fi
+
+#####
+# Create Magento web directory
+#####
+if [ ! -d "/etc/nginx/magento" ]
+  then
+    mkdir -p /etc/nginx/magento
+    chown -R nginx:nginx /etc/nginx/magento
+  else
+  	echo "Nginx conf directory /etc/nginx/magento already installed..";
+fi
+
+
+#####
+# Create Magento web directory
+#####
+if [ -d "/var/www/magento" ]
+  then
+    tar -czvf magento_$(date +%Y-%m-%d).tar.gz /var/www/magento
+    umount /var/www/magento/pub/media
+    rm -rf /var/www/magento
+  else
+  	echo "backup the web dir";
+fi
+
+#####
+# Create Magento web directory
+#####
+if [ ! -d "/var/www/magento" ]
+  then
+    mkdir -p /var/www/magento
+    chown -R nginx:nginx /var/www/magento
+  else
+  	echo "Web directory /var/www/magento already installed..";
+fi

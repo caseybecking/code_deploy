@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#####
+# Add bind mount to fstab if it doesn't exist
+#####
+grep "/var/www/magento/pub/media" /etc/fstab
+
+if [ $? -ne 0 ]
+  then
+    echo "/data/media /var/www/magento/pub/media none bind 0 0" >> /etc/fstab
+  else
+    echo "Media directory /var/www/magento/pub/media already added to fstab";
+fi
+
+#####
+# Create bind mount for media directory
+#####
+if [ ! -d "/var/www/magento/pub/media" ]
+  then
+    mkdir -p /var/www/magento/pub/media
+    mount -a
+  else
+    echo "Media directory /var/www/magento/pub/media already installed..";
+fi
