@@ -76,5 +76,5 @@ fi
 #####
 if [ ! -d "/var/cache/composer" ];then
     mkdir -p /var/cache/composer
-    chown www-data.www-data /var/cache/composer
+    chown nginx:nginx /var/cache/composer
 fi
