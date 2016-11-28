@@ -89,4 +89,4 @@ fi
 #####
 # Create bind mount for media directory
 #####
-composer create-project —stability=beta /project-community-edition Magento
+# 
