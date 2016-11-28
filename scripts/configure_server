@@ -36,6 +36,13 @@
 # fi
 
 
+if [ -f "/usr/share/nginx/html/index.html" ]
+  then
+    mv /usr/share/nginx/html/index.html /usr/share/nginx/html/index.html_BAK
+  else
+    echo "backup the index.hmtl";
+fi
+
 #####
 # Create Magento web directory
 #####
@@ -78,3 +85,8 @@ if [ ! -d "/var/cache/composer" ];then
     mkdir -p /var/cache/composer
     chown nginx:nginx /var/cache/composer
 fi
+
+#####
+# Create bind mount for media directory
+#####
+composer create-project —stability=beta /project-community-edition Magento
